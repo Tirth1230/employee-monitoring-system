@@ -44,9 +44,7 @@ employee-monitoring-system/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
 ```
-
 ---
 
 ## ⚙️ Installation
