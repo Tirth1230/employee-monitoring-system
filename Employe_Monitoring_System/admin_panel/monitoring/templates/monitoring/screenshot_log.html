@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Screenshot Logs</h2>
+
+<!-- Filter Form -->
+<form method="get" class="mb-4 flex gap-4 items-center">
+  <label>
+    User:
+    <select name="username">
+      <option value="">All</option>
+      {% for name in usernames %}
+        <option value="{{ name }}" {% if selected_username == name %}selected{% endif %}>{{ name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>
+    Date:
+    <input type="date" name="date" value="{{ selected_date }}">
+  </label>
+
+  <button type="submit">Filter</button>
+</form>
+
+<!-- Screenshot Cards -->
+<div class="screenshot-list">
+  {% for log in logs %}
+    <div class="screenshot-card">
+      <div class="log-entry mb-4 p-3 border rounded shadow-sm">
+  <p><strong>User:</strong> {{ log.username }}</p>
+  <p><strong>IP Address:</strong> {{ log.ip_address }}</p>
+  <p><strong>Device Info:</strong> {{ log.device_info }}</p>
+  <p><strong>Date & Time:</strong> {{ log.timestamp }}</p>
+
+  <a href="{{ log.image.url }}" target="_blank" class="btn btn-primary btn-sm">Preview</a>
+  <a href="{{ log.image.url }}" download class="btn btn-success btn-sm ms-2">Download</a>
+</div>
+    </div>
+  {% empty %}
+    <p>No screenshots found for the selected filters.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}
